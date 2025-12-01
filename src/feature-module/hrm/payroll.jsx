@@ -13,7 +13,7 @@ import ImageWithBasePath from "../../core/img/imagewithbasebath";
 import Sidebar from "../../InitialPage/Sidebar/Sidebar";
 import Header from "../../InitialPage/Sidebar/Header";
 
-const API_URL = `${process.env.REACT_APP_API_URL}/attendance/salary`;
+const API_URL = `${import.meta.env.VITE_API_URL}/attendance/salary`;
 
 const Payroll = () => {
   const dispatch = useDispatch();

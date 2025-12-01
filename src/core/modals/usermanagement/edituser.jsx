@@ -35,7 +35,7 @@ const EditUser = ({ userData, onUserUpdated }) => {
                 setRolesLoading(true);
                 const token = localStorage.getItem("userToken");
                 const response = await axios.get(
-                    `${process.env.REACT_APP_API_URL}/role/roles`,
+                    `${import.meta.env.VITE_API_URL}/role/roles`,
                     {
                         headers: {
                             "Content-Type": "application/json",
@@ -160,7 +160,7 @@ const EditUser = ({ userData, onUserUpdated }) => {
             console.log("Data being submitted:", submitData);
 
             const response = await axios.put(
-                `${process.env.REACT_APP_API_URL}/user/users`, 
+                `${import.meta.env.VITE_API_URL}/user/users`, 
                 submitData,
                 {
                     headers: {

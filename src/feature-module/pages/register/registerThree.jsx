@@ -191,7 +191,7 @@ const RegisterThree = () => {
       email: email,
     };
 
-    const API_URL = `${process.env.REACT_APP_API_URL}/user/register`;
+    const API_URL = `${import.meta.env.VITE_API_URL}/user/register`;
 
     try {
       const response = await axios.post(API_URL, apiPayload);

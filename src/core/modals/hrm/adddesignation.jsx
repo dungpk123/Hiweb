@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 import axios from "axios";
 import Select from "react-select";
 
-const API_DEPARTMENTS_URL = `${process.env.REACT_APP_API_URL}/department/departments`;
-const API_USER_LIST = `${process.env.REACT_APP_API_URL}/role/userRoles`;
+const API_DEPARTMENTS_URL = `${import.meta.env.VITE_API_URL}/department/departments`;
+const API_USER_LIST = `${import.meta.env.VITE_API_URL}/role/userRoles`;
 
 const MySwal = withReactContent(Swal);
 

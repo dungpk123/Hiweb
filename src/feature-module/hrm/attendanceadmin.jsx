@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
-const API_URL = `${process.env.REACT_APP_API_URL}/attendance/attendances`;
+const API_URL = `${import.meta.env.VITE_API_URL}/attendance/attendances`;
 
 const AttendanceAdmin = () => {
   const dispatch = useDispatch();
@@ -123,7 +123,7 @@ const AttendanceAdmin = () => {
     const fetchDepartments = async () => {
       try {
         const token = localStorage.getItem("userToken");
-        const api = `${process.env.REACT_APP_API_URL}/department/departments?per_page=10000`;
+        const api = `${import.meta.env.VITE_API_URL}/department/departments?per_page=10000`;
         const res = await axios.get(api, { headers: { Authorization: token ? `${token}` : "" } });
 
         const lang = (i18n && i18n.language) ? i18n.language.toLowerCase() : "en";

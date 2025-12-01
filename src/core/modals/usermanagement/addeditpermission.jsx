@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 
-const API_URL = `${process.env.REACT_APP_API_URL}/role/permissions`;
+const API_URL = `${import.meta.env.VITE_API_URL}/role/permissions`;
 
 const AddEditPermission = ({ show, onHide, permission, onSuccess }) => {
   const { t } = useTranslation();

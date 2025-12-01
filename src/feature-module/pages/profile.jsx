@@ -179,8 +179,8 @@ const Profile = () => {
     }
   };
 
-  const API_URL_PROFILE = `${process.env.REACT_APP_API_URL}/user/profile`;
-  const API_URL_PASSWORD = `${process.env.REACT_APP_API_URL}/user/changePassword`;
+  const API_URL_PROFILE = `${import.meta.env.VITE_API_URL}/user/profile`;
+  const API_URL_PASSWORD = `${import.meta.env.VITE_API_URL}/user/changePassword`;
 
   useEffect(() => {
     const fetchCurrentUser = () => {

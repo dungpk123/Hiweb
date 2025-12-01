@@ -26,7 +26,7 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { setToogleHeader } from "../../core/redux/action";
 
-const API_URL = `${process.env.REACT_APP_API_URL}/department/departments`;
+const API_URL = `${import.meta.env.VITE_API_URL}/department/departments`;
 
 const DepartmentList = () => {
   const route = all_routes;

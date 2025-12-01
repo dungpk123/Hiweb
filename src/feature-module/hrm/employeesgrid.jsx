@@ -41,7 +41,7 @@ const EmployeesGrid = () => {
   const [, setPendingIds] = useState([]);
   const [toast, setToast] = useState({ show: false, type: "", message: "" });
 
-  const API_URL = `${process.env.REACT_APP_API_URL}/department/userDepartments`;
+  const API_URL = `${import.meta.env.VITE_API_URL}/department/userDepartments`;
   const fetchEmployees = async () => {
     try {
       setLoading(true);

@@ -23,7 +23,7 @@ import moment from "moment";
 
 import { useTranslation } from "react-i18next";
 
-const API_URL = `${process.env.REACT_APP_API_URL}/role/roles`;
+const API_URL = `${import.meta.env.VITE_API_URL}/role/roles`;
 
 const RolesPermissions = () => {
   const { t, i18n } = useTranslation();
