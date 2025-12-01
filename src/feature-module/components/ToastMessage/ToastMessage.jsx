@@ -38,7 +38,7 @@ const ToastMessage = ({ type, message, onClose }) => {
         onClick={onClose}
       />
     </div>
-  );
+  );d
 };
 
 /* PropTypes */

@@ -17,9 +17,12 @@ import AddUsers from "../../core/modals/usermanagement/addusers";
 import EditUser from "../../core/modals/usermanagement/edituser";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import ShowingInfo from "../components/ShowingInfo";
+import PaginationControl from "../components/PaginationControl";
 
 const Users = () => {
   const { t } = useTranslation();
+  
   // State management
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -154,163 +157,6 @@ const Users = () => {
     },
     [currentPage, totalPages]
   );
-
-  const renderPagination = () => {
-    const current = currentPage;
-    const total = totalPages;
-    const maxPagesToShow = 5;
-
-    if (total <= 1) return null;
-
-    const pages = [];
-
-    if (total <= maxPagesToShow) {
-      for (let i = 1; i <= total; i++) {
-        pages.push(i);
-      }
-    } else {
-      pages.push(1);
-
-      let start = Math.max(2, current - 1);
-      let end = Math.min(total - 1, current + 1);
-
-      if (current > 3) {
-        pages.push("...");
-      }
-
-      for (let i = start; i <= end; i++) {
-        if (i !== 1 && i !== total) {
-          pages.push(i);
-        }
-      }
-
-      let uniquePagesTemp = Array.from(
-        new Set(pages.filter((p) => p !== "..."))
-      ).sort((a, b) => a - b);
-
-      if (current < total - 2) {
-        if (uniquePagesTemp[uniquePagesTemp.length - 1] < total - 1) {
-          if (pages[pages.length - 1] !== "...") {
-            pages.push("...");
-          }
-        }
-      }
-
-      if (pages[pages.length - 1] !== total) {
-        if (pages[pages.length - 1] !== "..." || pages.length === 1) {
-          const tempSet = new Set([1]);
-
-          for (
-            let i = Math.max(2, current - 1);
-            i <= Math.min(total - 1, current + 1);
-            i++
-          ) {
-            tempSet.add(i);
-          }
-
-          if (current > 3) {
-            finalPages.push("...");
-          }
-
-          const middlePages = Array.from(tempSet)
-            .filter((p) => p !== 1 && p !== total)
-            .sort((a, b) => a - b);
-
-          finalPages.push(...middlePages);
-
-          if (
-            current < total - 2 &&
-            middlePages.length > 0 &&
-            middlePages[middlePages.length - 1] < total - 1
-          ) {
-            finalPages.push("...");
-          }
-
-          finalPages.push(total);
-        }
-      }
-    }
-    const finalPages = [];
-    const tempSet = new Set();
-
-    tempSet.add(1);
-
-    for (let i = current - 1; i <= current + 1; i++) {
-      if (i > 1 && i < total) {
-        tempSet.add(i);
-      }
-    }
-
-    tempSet.add(total);
-
-    const sortedPages = Array.from(tempSet).sort((a, b) => a - b);
-
-    sortedPages.forEach((page, index) => {
-      if (index > 0 && page > sortedPages[index - 1] + 1) {
-        finalPages.push("...");
-      }
-      finalPages.push(page);
-    });
-    return (
-      <div
-        className="dataTables_paginate paging_simple_numbers"
-        id="DataTables_Table_0_paginate"
-      >
-        <ul className="pagination">
-          {/* Previous Button */}
-          <li
-            className={`paginate_button page-item previous ${
-              current === 1 ? "disabled" : ""
-            }`}
-            onClick={() => handlePageChange(current - 1)}
-          >
-            <Link to="#" className="page-link">
-              <FontAwesomeIcon icon={faAngleLeft} />
-            </Link>
-          </li>
-          {/* Page Numbers */}
-          {finalPages.map((page, index) => {
-            if (page === "...") {
-              return (
-                <li
-                  key={`dot-${index}`}
-                  className="paginate_button page-item disabled"
-                >
-                  <Link to="#" className="page-link">
-                    ...
-                  </Link>
-                </li>
-              );
-            }
-            return (
-              <li
-                key={page}
-                className={`paginate_button page-item ${
-                  page === current ? "active" : ""
-                }`}
-                onClick={() => handlePageChange(page)}
-              >
-                <Link to="#" className="page-link">
-                  {page}
-                </Link>
-              </li>
-            );
-          })}
-          {/* Next Button */}
-          <li
-            className={`paginate_button page-item next ${
-              current === total ? "disabled" : ""
-            }`}
-            onClick={() => handlePageChange(current + 1)}
-          >
-            <Link to="#" className="page-link">
-              <FontAwesomeIcon icon={faAngleRight} />
-            </Link>
-          </li>
-        </ul>
-      </div>
-    );
-  };
 
   // Handle view user detail
   const handleViewUser = (user) => {
@@ -639,21 +485,11 @@ const Users = () => {
                   <p className="text-danger">{error}</p>
                 ) : (
                   <>
-                    <div className="mb-3">
-                      <small className="text-muted">
-                        {t("user-list.total", {
-                          count: filteredUsers.length,
-                          total: totalItems,
-                        })}
-                        {searchTerm && (
-                          <span>
-                            {" "}
-                            {t('user-list.search_keyword')}&quot;<strong>{searchTerm}</strong>
-                            &quot;
-                          </span>
-                        )}
-                      </small>
-                    </div>
+                    <ShowingInfo 
+                      currentCount={Math.min(filteredUsers.length, totalItems)}
+                      totalCount={totalItems}
+                      type="users"
+                    />
                     <Table columns={columns} dataSource={filteredUsers} />
                   </>
                 )}
@@ -972,7 +808,11 @@ const Users = () => {
             </div>
           )}
         </div>
-        {renderPagination()}
+        <PaginationControl 
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
       <AddUsers />
       <EditUser

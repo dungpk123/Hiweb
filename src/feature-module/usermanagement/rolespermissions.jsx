@@ -20,8 +20,9 @@ import Table from "../../core/pagination/datatable";
 import AddRole from "../../core/modals/usermanagement/addrole";
 import EditRole from "../../core/modals/usermanagement/editrole";
 import moment from "moment";
-
 import { useTranslation } from "react-i18next";
+import ShowingInfo from "../components/ShowingInfo";
+import PaginationControl from "../components/PaginationControl";
 
 const API_URL = `${import.meta.env.VITE_API_URL}/role/roles`;
 
@@ -318,103 +319,6 @@ const RolesPermissions = () => {
     }
   }, [isFilterVisible, fetchAllRolesData, roleOptions.length]);
 
-  const renderPagination = () => {
-    if (searchQuery || selectedFilterRole != null || selectedDate != null) {
-      return null;
-    }
-
-    const pages = [];
-    const maxVisiblePages = 5;
-    const current = currentPage;
-    const total = totalPages;
-
-    if (total <= maxVisiblePages) {
-      for (let i = 1; i <= total; i++) {
-        pages.push(i);
-      }
-    } else {
-      pages.push(1);
-
-      if (current > 3) {
-        pages.push("...");
-      }
-
-      for (
-        let i = Math.max(2, current - 1);
-        i <= Math.min(total - 1, current + 1);
-        i++
-      ) {
-        if (i !== 1 && i !== total) {
-          pages.push(i);
-        }
-      }
-
-      if (current < total - 2) {
-        pages.push("...");
-      }
-
-      if (total > 1 && pages[pages.length - 1] !== total) {
-        pages.push(total);
-      }
-    }
-
-    const uniquePages = Array.from(new Set(pages));
-
-    return (
-      <div
-        className="dataTables_paginate paging_simple_numbers"
-        id="DataTables_Table_0_paginate"
-      >
-        <ul className="pagination">
-          <li
-            className={`paginate_button page-item previous ${
-              current === 1 ? "disabled" : ""
-            }`}
-            onClick={() => handlePageChange(current - 1)}
-          >
-            <Link to="#" className="page-link">
-              <FontAwesomeIcon icon={faAngleLeft} />
-            </Link>
-          </li>
-          {uniquePages.map((page, index) => {
-            if (page === "...") {
-              return (
-                <li key={index} className="paginate_button page-item disabled">
-                  <Link to="#" className="page-link">
-                    ...
-                  </Link>
-                </li>
-              );
-            }
-            return (
-              <li
-                key={index}
-                className={`paginate_button page-item ${
-                  page === current ? "active" : ""
-                }`}
-                onClick={() => handlePageChange(page)}
-              >
-                <Link to="#" className="page-link">
-                  {page}
-                </Link>
-              </li>
-            );
-          })}
-          <li
-            className={`paginate_button page-item next ${
-              current === total ? "disabled" : ""
-            }`}
-            onClick={() => handlePageChange(current + 1)}
-          >
-            <Link to="#" className="page-link">
-              <FontAwesomeIcon icon={faAngleRight} />
-            </Link>
-          </li>
-        </ul>
-      </div>
-    );
-  };
-
   const renderTooltip = (props) => (
     <Tooltip id="pdf-tooltip" {...props}>
       Pdf
@@ -705,27 +609,22 @@ const RolesPermissions = () => {
                 ) : error ? (
                   <p className="text-danger">{error}</p>
                 ) : (
-                  <Table columns={columns} dataSource={roles} />
+                  <>
+                    <ShowingInfo 
+                      currentCount={roles.length}
+                      totalCount={roles.length}
+                      type="roles"
+                    />
+                    <Table columns={columns} dataSource={roles} />
+                  </>
                 )}
               </div>
-              {/* Phần Phân Trang */}
-              <div className="d-flex justify-content-between align-items-center mb-3">
-                <div
-                  className="dataTables_info"
-                  id="DataTables_Table_0_info"
-                  role="status"
-                  aria-live="polite"
-                >
-                  {/* Hiển thị số lượng bản ghi nếu không phân trang */}
-                  {(searchQuery ||
-                    selectedFilterRole != null ||
-                    selectedDate != null) &&
-                  roles.length > 0
-                    ? t("common.showing_results", { count: roles.length })
-                    : null}
-                </div>
-                {renderPagination()}
-              </div>
+              {/* Phân Trang */}
+              <PaginationControl 
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             </div>
           </div>
         </div>

@@ -18,6 +18,8 @@ import AddUsersRoles from "../../core/modals/usermanagement/addusersrole";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
+import ShowingInfo from "../components/ShowingInfo";
+import PaginationControl from "../components/PaginationControl";
 
 const API_URL = `${import.meta.env.VITE_API_URL}/role/userRoles`;
 const API_ROLES_URL = `${import.meta.env.VITE_API_URL}/role/roles`;
@@ -371,111 +373,6 @@ const UsersRoles = () => {
     </Tooltip>
   );
 
-  const renderPagination = () => {
-    const pages = [];
-    const maxVisiblePages = 5;
-    const current = currentPage;
-    const total = totalPages;
-
-    if (total <= 1) return null;
-
-    if (total <= maxVisiblePages) {
-      for (let i = 1; i <= total; i++) {
-        pages.push(i);
-      }
-    } else {
-      pages.push(1);
-
-      if (current > 3) {
-        pages.push("...");
-      }
-
-      for (
-        let i = Math.max(2, current - 1);
-        i <= Math.min(total - 1, current + 1);
-        i++
-      ) {
-        if (i !== 1 && i !== total) {
-          pages.push(i);
-        }
-      }
-
-      const uniquePagesTemp = Array.from(
-        new Set(pages.filter((p) => p !== "..."))
-      );
-
-      if (current < total - 2) {
-        if (
-          uniquePagesTemp.length > 0 &&
-          uniquePagesTemp[uniquePagesTemp.length - 1] < total - 1
-        ) {
-          pages.push("...");
-        }
-      }
-
-      // Thêm trang cuối nếu chưa có và total > 1
-      if (total > 1 && uniquePagesTemp.indexOf(total) === -1) {
-        pages.push(total);
-      }
-    }
-
-    const uniquePages = Array.from(new Set(pages));
-
-    return (
-      <div
-        className="dataTables_paginate paging_simple_numbers"
-        id="DataTables_Table_0_paginate"
-      >
-        <ul className="pagination">
-          <li
-            className={`paginate_button page-item previous ${
-              current === 1 ? "disabled" : ""
-            }`}
-            onClick={() => handlePageChange(current - 1)}
-          >
-            <Link to="#" className="page-link">
-              <FontAwesomeIcon icon={faAngleLeft} />
-            </Link>
-          </li>
-          {uniquePages.map((page, index) => {
-            if (page === "...") {
-              return (
-                <li key={index} className="paginate_button page-item disabled">
-                  <Link to="#" className="page-link">
-                    ...
-                  </Link>
-                </li>
-              );
-            }
-            return (
-              <li
-                key={index}
-                className={`paginate_button page-item ${
-                  page === current ? "active" : ""
-                }`}
-                onClick={() => handlePageChange(page)}
-              >
-                <Link to="#" className="page-link">
-                  {page}
-                </Link>
-              </li>
-            );
-          })}
-          <li
-            className={`paginate_button page-item next ${
-              current === total ? "disabled" : ""
-            }`}
-            onClick={() => handlePageChange(current + 1)}
-          >
-            <Link to="#" className="page-link">
-              <FontAwesomeIcon icon={faAngleRight} />
-            </Link>
-          </li>
-        </ul>
-      </div>
-    );
-  };
-
   return (
     <div>
       <div className="page-wrapper">
@@ -605,6 +502,11 @@ const UsersRoles = () => {
               </div>
 
               {/* Table List */}
+              <ShowingInfo 
+                currentCount={Math.min(data.length, totalItems)}
+                totalCount={totalItems}
+                type="user roles"
+              />
               <div className="table-responsive">
                 <Table
                   columns={columns}
@@ -616,16 +518,11 @@ const UsersRoles = () => {
               </div>
 
               {/* Pagination */}
-              <div className="d-flex justify-content-between align-items-center flex-wrap">
-                <div className="dataTables_info">
-                  {t("common.showing") || "Showing"}{" "}
-                  {(currentPage - 1) * 10 + 1} {t("common.to") || "to"}{" "}
-                  {Math.min(currentPage * 10, totalItems)}{" "}
-                  {t("common.of") || "of"} {totalItems}{" "}
-                  {t("common.entries") || "entries"}
-                </div>
-                {renderPagination()}
-              </div>
+              <PaginationControl 
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             </div>
           </div>
           {/* /product list */}

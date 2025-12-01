@@ -11,7 +11,6 @@ import Select from 'react-select';
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
 import Table from "../../core/pagination/datatable";
-
 const DeleteAccount = () => {
 
     const dispatch = useDispatch();
