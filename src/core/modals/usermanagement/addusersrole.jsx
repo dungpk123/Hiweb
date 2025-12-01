@@ -6,9 +6,9 @@ import { useTranslation } from "react-i18next";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 
-const API_USER_ROLES = `${process.env.REACT_APP_API_URL}/role/userRoles`;
-const API_ROLES_URL = `${process.env.REACT_APP_API_URL}/role/roles`;
-const API_USER_LIST = `${process.env.REACT_APP_API_URL}/role/userRoles`; 
+const API_USER_ROLES = `${import.meta.env.VITE_API_URL}/role/userRoles`;
+const API_ROLES_URL = `${import.meta.env.VITE_API_URL}/role/roles`;
+const API_USER_LIST = `${import.meta.env.VITE_API_URL}/role/userRoles`; 
 
 const AddUsersRoles = ({ onUserAdded }) => {
   const { t } = useTranslation();

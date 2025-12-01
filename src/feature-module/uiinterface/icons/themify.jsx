@@ -27,9 +27,9 @@ import {
   DoubleLeftOutlined,
   VerticalLeftOutlined,
   VerticalRightOutlined,
-  VerticalAlignTopOutlin,
-  VerticalAlignMiddleOut,
-  VerticalAlignBottomOut,
+  // VerticalAlignTopOutlin, // Typo - should be VerticalAlignTopOutlined (already imported above)
+  // VerticalAlignMiddleOut, // Typo - should be VerticalAlignMiddleOutlined (already imported above)
+  // VerticalAlignBottomOut, // Typo - should be VerticalAlignBottomOutlined (already imported above)
   ForwardOutlined,
   BackwardOutlined,
   RollbackOutlined,

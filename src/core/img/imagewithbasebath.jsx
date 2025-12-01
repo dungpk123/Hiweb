@@ -3,19 +3,20 @@ import PropTypes from "prop-types";
 import { base_path } from "../../environment";
 
 const ImageWithBasePath = (props) => {
-  // Ưu tiên dùng PUBLIC_URL để chắc chắn ảnh load được khi build
-  const prefix = process.env.PUBLIC_URL
-    ? process.env.PUBLIC_URL + "/"
-    : base_path;
+  // Vite uses import.meta.env.BASE_URL for public path
+  const publicUrl = import.meta.env.BASE_URL || base_path;
+  const prefix = publicUrl.endsWith('/') ? publicUrl : publicUrl + '/';
+  
   const isAbsoluteUrl =
     typeof props.src === "string" &&
     (props.src.startsWith("http://") ||
       props.src.startsWith("https://") ||
       props.src.startsWith("data:"));
+      
   const fullSrc = isAbsoluteUrl
     ? props.src
     : props.src.startsWith("/")
-    ? `${process.env.PUBLIC_URL}${props.src}`
+    ? `${publicUrl}${props.src.substring(1)}`
     : `${prefix}${props.src}`;
 
   return (

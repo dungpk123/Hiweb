@@ -46,7 +46,7 @@ const mapProfileToHeaderUser = (profile, rolesOverride, defaultAvatar) => {
 };
 
 const Header = () => {
-  const API_URL = `${process.env.REACT_APP_API_URL}/user/profile`;
+  const API_URL = `${import.meta.env.VITE_API_URL}/user/profile`;
   const DEFAULT_AVATAR = "assets/img/profiles/avatar-default.png";
 
   const route = all_routes;

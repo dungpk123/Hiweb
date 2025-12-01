@@ -78,7 +78,7 @@ const EditDepartmentList = ({ initialData, onUpdate, onCloseModal }) => {
             return;
         }
 
-        const API_URL = `${process.env.REACT_APP_API_URL}/department/departments`;
+        const API_URL = `${import.meta.env.VITE_API_URL}/department/departments`;
         const userToken = localStorage.getItem("userToken");
 
         // 2. Kiểm tra Token

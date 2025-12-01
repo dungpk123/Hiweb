@@ -10,7 +10,7 @@ import Select from 'react-select';
 import { Filter } from "react-feather";
 import ImageWithBasePath from "../../core/img/imagewithbasebath";
 
-const API_URL = `${process.env.REACT_APP_API_URL}/role/rolePermissions`;
+const API_URL = `${import.meta.env.VITE_API_URL}/role/rolePermissions`;
 
 const Permissions = () => {
 

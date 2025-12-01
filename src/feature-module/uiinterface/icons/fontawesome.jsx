@@ -21,7 +21,7 @@ import {
   faAngleLeft,
   faAngleRight,
   faAngleUp,
-  faApple,
+  // faApple, // Removed - not in free-solid-svg-icons
   faArchive,
   faChartArea,
   faArrowCircleDown,

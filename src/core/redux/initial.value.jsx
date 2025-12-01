@@ -29,8 +29,8 @@ import { lowstockdata } from "../json/lowstockdata";
 import { categorylist } from "../json/categorylistdata";
 import { subcateorydata } from "../json/subcategorydata";
 import { callhistorydata } from "../json/callhistorydata";
+import { productlistdata } from "../json/productlistdata";
 
-const { productlistdata } = require("../json/productlistdata");
 // save user
 const saveUser = JSON.parse(localStorage.getItem("CurrentUser"));
 

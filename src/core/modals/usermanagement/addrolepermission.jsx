@@ -6,9 +6,9 @@ import Swal from 'sweetalert2';
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 
-const API_ROLE_PERMISSIONS = `${process.env.REACT_APP_API_URL}/role/rolePermissions`;
-const API_USER_ROLES = `${process.env.REACT_APP_API_URL}/role/Roles`;
-const API_PERMISSIONS = `${process.env.REACT_APP_API_URL}/role/permissions`;
+const API_ROLE_PERMISSIONS = `${import.meta.env.VITE_API_URL}/role/rolePermissions`;
+const API_USER_ROLES = `${import.meta.env.VITE_API_URL}/role/Roles`;
+const API_PERMISSIONS = `${import.meta.env.VITE_API_URL}/role/permissions`;
 
 const AddRolePermission = ({ onSuccess }) => {
   const { t, i18n } = useTranslation();

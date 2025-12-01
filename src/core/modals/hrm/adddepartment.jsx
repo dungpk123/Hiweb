@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import PropTypes from "prop-types";
 
-const API_URL = `${process.env.REACT_APP_API_URL}/department/departments`;
+const API_URL = `${import.meta.env.VITE_API_URL}/department/departments`;
 
 const AddDepartment = ({ onDepartmentAdded }) => {
   const { t } = useTranslation();

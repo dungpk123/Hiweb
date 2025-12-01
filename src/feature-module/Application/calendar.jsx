@@ -25,8 +25,9 @@ const Calendar = () => {
     [category_color, setcategory_color] = useState(""),
     [calenderevent, setcalenderevent] = useState(""),
     [weekendsVisible, setweekendsVisible] = useState(true),
-    [currentEvents, setscurrentEvents] = useState([]),
-    defaultEvents = [
+    [currentEvents, setscurrentEvents] = useState([]);
+  
+  let defaultEvents = [
       {
         title: "Event Name 4",
         start: Date.now() + 148000000,
@@ -116,13 +117,14 @@ const Calendar = () => {
     setiseditdelete(false);
   };
   const clickupdateevent = () => {
-    const newArray = defaultEvents;
+    const newArray = [...defaultEvents];
     for (let i = 0; i < newArray.length; i++) {
       if (newArray[i].id === parseInt(calenderevent.id)) {
         newArray[i].title = event_title;
       }
     }
-    defaultEvents = newArray;
+    defaultEvents.length = 0;
+    defaultEvents.push(...newArray);
     setiseditdelete(false);
   };
 

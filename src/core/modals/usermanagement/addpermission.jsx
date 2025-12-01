@@ -3,7 +3,7 @@ import axios from "axios";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
-const API_URL = `${process.env.REACT_APP_API_URL}/role/permissions`;
+const API_URL = `${import.meta.env.VITE_API_URL}/role/permissions`;
 const AddPermission = ({ onSuccess }) => {
   const { t } = useTranslation();
   const [form, setForm] = useState({

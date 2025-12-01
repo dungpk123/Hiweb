@@ -29,7 +29,7 @@ import AddDepartment from "../../core/modals/hrm/adddepartment";
 import EditDepartment from "../../core/modals/hrm/editdepartmentlist";
 import { setToogleHeader } from "../../core/redux/action";
 
-const API_URL = `${process.env.REACT_APP_API_URL}/department/departments`;
+const API_URL = `${import.meta.env.VITE_API_URL}/department/departments`;
 
 const DepartmentGrid = () => {
   const route = all_routes;
