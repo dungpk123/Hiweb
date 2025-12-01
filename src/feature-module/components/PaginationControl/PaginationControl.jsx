@@ -54,8 +54,9 @@ const PaginationControl = ({ currentPage, totalPages, onPageChange }) => {
     <div
       className="dataTables_paginate paging_simple_numbers"
       id="DataTables_Table_0_paginate"
+      style={{ display: 'flex', justifyContent: 'center', width: '100%' }}
     >
-      <ul className="pagination">
+      <ul className="pagination" style={{ margin: '0 auto' }}>
         <li
           className={`paginate_button page-item previous ${
             currentPage === 1 ? "disabled" : ""

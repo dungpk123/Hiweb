@@ -1,0 +1,112 @@
+// ============================================
+// User Management - Simple & Beautiful Responsive
+// ============================================
+
+// Mobile & Tablet Responsive
+@media (max-width: 991px) {
+  
+  // Page Header
+  .page-header {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1rem;
+    
+    .add-item {
+      width: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      
+      .page-title {
+        text-align: center !important;
+        width: 100% !important;
+        
+        h4, h6 {
+          text-align: center !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+        }
+      }
+    }
+    
+    .table-top-head {
+      justify-content: center !important;
+      width: 100% !important;
+      display: flex !important;
+    }
+    
+    .page-btn {
+      width: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+      
+      .btn {
+        width: 100% !important;
+        justify-content: center !important;
+        display: flex !important;
+      }
+    }
+  }
+  
+  // Search & Filter
+  .table-top {
+    flex-direction: column;
+    gap: 0.75rem;
+    
+    .search-set,
+    .search-path,
+    .form-sort {
+      width: 100%;
+    }
+  }
+  
+  // Filter Card
+  #filter_inputs {
+    .row > [class*="col-"] {
+      width: 100%;
+      margin-bottom: 0.75rem;
+    }
+  }
+  
+  // Table - Horizontal Scroll
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    
+    .table {
+      min-width: 800px;
+    }
+  }
+  
+  // Center alignment
+  .showing-info {
+    text-align: center;
+  }
+  
+  // Pagination center alignment
+  .dataTables_paginate {
+    display: flex !important;
+    justify-content: center !important;
+    width: 100% !important;
+    
+    .pagination {
+      margin: 0 auto !important;
+      display: flex !important;
+      justify-content: center !important;
+    }
+  }
+  
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+// Small Mobile
+@media (max-width: 576px) {
+  .table {
+    min-width: 700px;
+    font-size: 0.875rem;
+  }
+}
